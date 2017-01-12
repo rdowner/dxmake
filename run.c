@@ -76,7 +76,7 @@ Execute_Command(char *cmd, short ignore)
 	int err;
 
 	if ((err = vfork()) == 0) {
-	    execlp("/bin/sh", "/bin/sh", "-c", cmd, 0);
+	    execlp("/bin/sh", "/bin/sh", "-c", cmd, NULL);
 	    exit(30);
 	} else {
 	    int uwait;

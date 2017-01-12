@@ -262,8 +262,8 @@ char *dstMat;
     List tmpList;
     short space = 0;
 
-    srcMat = ExpandVariable(srcMat, NULL);
-    dstMat = ExpandVariable(dstMat, NULL);
+    srcMat = ExpandVariable((ubyte *)srcMat, NULL);
+    dstMat = ExpandVariable((ubyte *)dstMat, NULL);
 
     NewList(&tmpList);
     CopyCmdList(fromList, &tmpList);
@@ -338,7 +338,7 @@ List *list;
 		    error(FATAL, "bad variable spec in command list for %s", dep->dn_Node.ln_Name);
 		spec[c0++] = c;
 		spec[c0] = 0;
-		ExpandVariable(spec, &tmpDst);
+		ExpandVariable((ubyte *)spec, &tmpDst);
 		FreePathBuffer(spec);
 		continue;
 	    }

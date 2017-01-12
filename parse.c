@@ -413,7 +413,7 @@ ParseAssignment(char *varName, token_t t, int cond, char type)
 	char *buf = malloc(CmdListSize(&tmpList) + 1);
 	CopyCmdListBuf(&tmpList, buf);
 	if (newVar) {
-	    ExpandVariable(buf, &tmpList);
+	    ExpandVariable((ubyte *)buf, &tmpList);
 	    var = MakeVar(varName, type);
 	    AppendCmdList(&tmpList, &var->var_CmdList);
 	}
@@ -755,7 +755,7 @@ ParseVariableBuf(List *cmdList, ubyte *buf, short c0)
 	CopyCmdList(&var->var_CmdList, cmdList);
 	FreePathBuffer(symBuf);
 	FreePathBuffer(altBuf);
-	return(buf);
+	return((char *)buf);
     }
     if (c != ':')
 	error(FATAL, "Bad variable specification after name");
@@ -791,7 +791,7 @@ ParseVariableBuf(List *cmdList, ubyte *buf, short c0)
 	CopyCmdListConvert(&var->var_CmdList, cmdList, altBuf, symBuf);
 	FreePathBuffer(symBuf);
 	FreePathBuffer(altBuf);
-	return(buf);
+	return((char *)buf);
     }
 
     if (c != ':')
@@ -820,7 +820,7 @@ ParseVariableBuf(List *cmdList, ubyte *buf, short c0)
     CopyCmdListConvert(&var->var_CmdList, cmdList, altBuf, symBuf);
     FreePathBuffer(symBuf);
     FreePathBuffer(altBuf);
-    return(buf);
+    return((char *)buf);
 }
 
 char *
@@ -877,11 +877,11 @@ List *list;
     if (keepInList == 0) {
 	if (tmpListValid) {
 	    buf = malloc(CmdListSize(list) + 1);
-	    CopyCmdListBuf(list, buf);
+	    CopyCmdListBuf(list, (char *)buf);
 	}
     }
     --Levels;
-    return(buf);
+    return((char *)buf);
 }
 
 

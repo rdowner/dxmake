@@ -79,7 +79,7 @@ main(int ac, char **av)
 		*p2++ = 0;
 	    var = MakeVar(ptr, '$');
 	    if (p2) {
-		ExpandVariable(p2, &tmpList);
+		ExpandVariable((ubyte *)p2, &tmpList);
 		AppendCmdList(&tmpList, &var->var_CmdList);
 	    }
 	    break;
