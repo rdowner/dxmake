@@ -1,14 +1,34 @@
-Changelog
-=========
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
+as of the next released version.
+
+## [Unreleased]
+
+### Added
+
+### Changed
+
+### Fixed
+
 
 ## 2.13
 
+### Fixed
+
 Fix GCC warnings.
+
+### Changed
 
 Re-license as BSD
 
 
 ## 2.12
+
+### Fixed
 
 Fix a bug for the following sequence:
 
@@ -25,25 +45,35 @@ In this case target2 was not being executed if it did not exist.
 
 ## 2.11
 
+### Fixed
+
 Fix a nasty bug when reassigning a variable in the form: `X= $(X) a b c`
 
 
 ## 2.10
+
+### Fixed
 
 Conditionalize use of stat `st_gen`, linux doesn't implement the field.
 
 
 ## 2.9
 
+### Changed
+
 Create a port for dmake, rename dmake to dxmake to avoid a port
 conflict with someone else's dmake.
 
-Add `.ifhost`, `.ifos`, and `.ifarch` conditionals
-
 Remove old AMIGA ifdefs
+
+### Added
+
+Add `.ifhost`, `.ifos`, and `.ifarch` conditionals
 
 
 ## 2.8
+
+### Fixed
 
 Save and restore TOPDIR when running the .include directive in
 order to support multiple .include directives.
@@ -73,6 +103,8 @@ This may propogate and touch other targets (such as object files).
 
 ## 2.7
 
+### Fixed
+
 Fix the list ordering so commands for this situation:
 
     $(OBJS) : $(OD)
@@ -86,14 +118,20 @@ Are executed in the proper order.
 
 ## 2.6
 
+### Added
+
 Added `.include <path>`
 
 Added automatic `$(TOP)` calculation for `.include` sequences
+
+### Changed
 
 Rewrote dependancy handler
 
 
 ## 2.2
+
+### Fixed
 
 Found bug in parse.c relating to symbol buffers, would screw up
 symbolic replace in multiple-dependancy line.
