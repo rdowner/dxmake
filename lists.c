@@ -58,7 +58,7 @@ GetHead(struct List *list)
     struct Node *node = list->lh_Head;
 
     if (node->ln_Succ == NULL)
-	node = NULL;
+        node = NULL;
     return((void *)node);
 }
 
@@ -68,7 +68,7 @@ GetPred(struct Node *node)
     struct Node *pred = node->ln_Pred;
 
     if (pred->ln_Pred == NULL)
-	pred = NULL;
+        pred = NULL;
     return((void *)pred);
 }
 
@@ -78,7 +78,7 @@ GetSucc(struct Node *node)
     struct Node *next = node->ln_Succ;
 
     if (next->ln_Succ == NULL)
-	next = NULL;
+        next = NULL;
     return((void *)next);
 }
 
@@ -88,7 +88,7 @@ GetTail(struct List *list)
     struct Node *node = list->lh_TailPred;
 
     if (node->ln_Pred == NULL)
-	node = NULL;
+        node = NULL;
     return((void *)node);
 }
 
@@ -101,7 +101,7 @@ Insert(struct List *list, struct Node *node, struct Node *lnode)
      */
 
     if (lnode == NULL)
-	lnode = (struct Node *)&list->lh_Head;
+        lnode = (struct Node *)&list->lh_Head;
     node->ln_Pred = lnode;
     node->ln_Succ = lnode->ln_Succ;
     lnode->ln_Succ = node;
@@ -121,12 +121,12 @@ RemHead(struct List *list)
 {
     struct Node *node = list->lh_Head;
     if (node->ln_Succ) {
-	node->ln_Succ->ln_Pred = node->ln_Pred;
-	node->ln_Pred->ln_Succ = node->ln_Succ;
-	node->ln_Succ = NULL;
-	node->ln_Pred = NULL;
+        node->ln_Succ->ln_Pred = node->ln_Pred;
+        node->ln_Pred->ln_Succ = node->ln_Succ;
+        node->ln_Succ = NULL;
+        node->ln_Pred = NULL;
     } else {
-	node = NULL;
+        node = NULL;
     }
     return((void *)node);
 }

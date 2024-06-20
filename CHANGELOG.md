@@ -12,6 +12,12 @@ as of the next released version.
 
 ### Changed
 
+- Tabs to spaces. I realise this may upset some people, but DICE source code is
+  consistent that the indentation is 4 spaces - but that every 8 spaces gets
+  collapsed into a single tab. This style of identation is uncommon these days
+  and VSCode (and likely many other IDEs and editors) does not handle it
+  cleanly.
+
 ### Fixed
 
 

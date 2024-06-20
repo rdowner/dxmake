@@ -19,9 +19,9 @@
 
 #ifdef sun
 #include <strings.h>
-#define USE_PUTENV	1
+#define USE_PUTENV      1
 #else
-#define USE_PUTENV	0
+#define USE_PUTENV      0
 #endif
 
 typedef struct Node Node;
@@ -30,20 +30,20 @@ typedef struct List List;
 typedef unsigned char ubyte;
 typedef unsigned short uword;
 
-#define EXIT_CONTINUE	0
+#define EXIT_CONTINUE   0
 
 #define Prototype extern
 
-#define FATAL	0
-#define WARN	1
-#define DEBUG	2
+#define FATAL   0
+#define WARN    1
+#define DEBUG   2
 
 #define PBUFSIZE 256
 
-#define NT_RESOLVED	0x01
+#define NT_RESOLVED     0x01
 
-#define ED_WAIT		1
-#define ED_BACKGROUND	2
+#define ED_WAIT         1
+#define ED_BACKGROUND   2
 
 #define USE_DEBUG  1
 #if USE_DEBUG
@@ -63,19 +63,19 @@ typedef unsigned short uword;
 
 typedef struct DepNode {
     Node    dn_Node;
-    List    dn_DepCmdList;	/*  list of lists   */
+    List    dn_DepCmdList;      /*  list of lists   */
 /*    time_t  dn_Time;*/
     short   dn_Symbolic;
     short   dn_Flags;
-    int	    dn_Result;
+    int     dn_Result;
 } DepNode;
 
-#define DNF_VIRTUAL	0x0001	/* virtual lhs - has no command list */
+#define DNF_VIRTUAL     0x0001  /* virtual lhs - has no command list */
 
-#define DN_FAILED		-1
-#define DN_CHANGED 		0	
-#define DN_NOCHANGE_TOUCH	1
-#define DN_NOCHANGE		2
+#define DN_FAILED               -1
+#define DN_CHANGED              0       
+#define DN_NOCHANGE_TOUCH       1
+#define DN_NOCHANGE             2
 
 
 typedef struct DepRef  {
@@ -85,9 +85,9 @@ typedef struct DepRef  {
 } DepRef;
 
 typedef struct DepCmdList {
-    Node    dc_Node;		/*  greater link node	*/
-    List    dc_RhsList; 	/*  right hand side(s)	*/
-    List    *dc_CmdList;	 /*  command buf list	 */
+    Node    dc_Node;            /*  greater link node   */
+    List    dc_RhsList;         /*  right hand side(s)  */
+    List    *dc_CmdList;         /*  command buf list    */
 } DepCmdList;
 
 #define NT_CMDEOL   0x01
@@ -106,7 +106,7 @@ typedef struct Var {
 
 typedef struct IfNode {
     struct IfNode *if_Next;
-    int		if_Value;
+    int         if_Value;
 } IfNode;
 
 #include "tokens.h"

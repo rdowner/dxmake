@@ -57,11 +57,11 @@ MakeVar(char *name, char type)
     Var *var;
 
     for (var = GetHead(&VarList); var; var = GetSucc(&var->var_Node)) {
-	if ((char)var->var_Node.ln_Type == type && strcmp(var->var_Node.ln_Name, name) == 0) {
-	    while (PopCmdListChar(&var->var_CmdList) != EOF)
-		;
-	    return(var);
-	}
+        if ((char)var->var_Node.ln_Type == type && strcmp(var->var_Node.ln_Name, name) == 0) {
+            while (PopCmdListChar(&var->var_CmdList) != EOF)
+                ;
+            return(var);
+        }
     }
     var = malloc(sizeof(Var) + strlen(name) + 1);
     bzero(var, sizeof(Var));
@@ -80,22 +80,22 @@ FindVar(char *name, char type)
     Var *var;
 
     for (var = GetHead(&VarList); var; var = GetSucc(&var->var_Node)) {
-	if ((char)var->var_Node.ln_Type == type && strcmp(var->var_Node.ln_Name, name) == 0)
-	    break;
+        if ((char)var->var_Node.ln_Type == type && strcmp(var->var_Node.ln_Name, name) == 0)
+            break;
     }
 
     /*
-     *	check for local & env variable(s).  local variables under 2.04
-     *	or later only.
+     *  check for local & env variable(s).  local variables under 2.04
+     *  or later only.
      */
 
     if (var == NULL || var->var_Node.ln_Type == '0') {
-	char *ptr;
+        char *ptr;
 
-	if ((ptr = getenv(name)) != NULL) {
-	    var = MakeVar(name, '0');
-	    AppendVar(var, ptr, strlen(ptr));
-	}
+        if ((ptr = getenv(name)) != NULL) {
+            var = MakeVar(name, '0');
+            AppendVar(var, ptr, strlen(ptr));
+        }
     }
     return(var);
 }
@@ -107,7 +107,7 @@ char *buf;
 long len;
 {
     while (len--)
-	PutCmdListChar(&var->var_CmdList, *buf++);
+        PutCmdListChar(&var->var_CmdList, *buf++);
 }
 
 void
@@ -118,6 +118,6 @@ long len;
 {
     buf += len;
     while (len--)
-	InsCmdListChar(&var->var_CmdList, *--buf);
+        InsCmdListChar(&var->var_CmdList, *--buf);
 }
 

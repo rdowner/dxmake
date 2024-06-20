@@ -47,9 +47,9 @@ pushIf(IfNode **ifBase, int value)
     *ifBase = ifn;
 
     if (ifn->if_Next == NULL || ifn->if_Next->if_Value)
-	ifn->if_Value = value;
+        ifn->if_Value = value;
     else
-	ifn->if_Value = 0;
+        ifn->if_Value = 0;
     return(ifn->if_Value);
 }
 
@@ -61,9 +61,9 @@ popIf(IfNode **ifBase)
     *ifBase = ifn->if_Next;
     free(ifn);
     if ((ifn = *ifBase) == NULL)
-	return(1);
+        return(1);
     else
-	return(ifn->if_Value);
+        return(ifn->if_Value);
 }
 
 int
@@ -72,9 +72,9 @@ elseIf(IfNode **ifBase)
     IfNode *ifn = *ifBase;
 
     if (ifn->if_Next == NULL || ifn->if_Next->if_Value) {
-	ifn->if_Value = !ifn->if_Value;
+        ifn->if_Value = !ifn->if_Value;
     } else {
-	assert(ifn->if_Value == 0);
+        assert(ifn->if_Value == 0);
     }
     return(ifn->if_Value);
 }
