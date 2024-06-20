@@ -3,6 +3,7 @@
  *  DEFS.H
  */
 
+#include <sys/time.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -12,9 +13,13 @@
 #include <string.h>
 #include <fcntl.h>
 #include <time.h>
-#include <unistd.h>
 #include <assert.h>
+
+#ifdef unix
+#include <unistd.h>
 #include <pwd.h>
+#endif
+
 #include "lists.h"
 
 #ifdef sun

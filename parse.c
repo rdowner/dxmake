@@ -59,7 +59,9 @@ char *FileName = "";
 FILE *Fi;
 List CCList;
 
+#ifdef unix
 static const char *ccmd(int cno, const char *cmd, const char *arg1);
+#endif
 
 void
 InitParser()
@@ -211,6 +213,9 @@ char *fileName;
                         error(FATAL, ".else without .if*");
                     ifTrue = elseIf(&ifBase);
                 } else if (strcmp(SymBuf, ".ifuser") == 0) {
+#ifndef unix
+                    error(FATAL, ".ifuser directive not available on non-UNIX-like ports of dxmake");
+#else
                     if (ifTrue) {
                         struct passwd *pw;
 
@@ -226,6 +231,7 @@ char *fileName;
                     } else {
                         ifTrue = pushIf(&ifBase, 0);
                     }
+#endif
                 } else if (strcmp(SymBuf, ".ifdef") == 0) {
                     if (ifTrue) {
                         t = GetElement(ifTrue, &expansion);
@@ -240,6 +246,9 @@ char *fileName;
                         ifTrue = pushIf(&ifBase, 0);
                     }
                 } else if (strcmp(SymBuf, ".ifhost") == 0) {
+#ifndef unix
+                    error(FATAL, ".ifhost directive not available on non-UNIX-like ports of dxmake");
+#else
                     if (ifTrue) {
                         t = GetElement(ifTrue, &expansion);
                         if (t != TokSym)
@@ -252,12 +261,18 @@ char *fileName;
                     } else {
                         ifTrue = pushIf(&ifBase, 0);
                     }
+#endif
                 } else if (strcmp(SymBuf, ".ifos") == 0) {
                     if (ifTrue) {
                         t = GetElement(ifTrue, &expansion);
                         if (t != TokSym)
                             error(FATAL, "Expected a symbol for .ifos!");
-                        if (strcasecmp(SymBuf, ccmd(2, "uname", "-s")) == 0) {
+#ifdef unix
+                        const char *osName = ccmd(2, "uname", "-s");
+#else
+                        const char *osName = "AmigaOS";
+#endif
+                        if (strcasecmp(SymBuf, osName) == 0) {
                             ifTrue = pushIf(&ifBase, 1);
                         } else {
                             ifTrue = pushIf(&ifBase, 0);
@@ -270,7 +285,12 @@ char *fileName;
                         t = GetElement(ifTrue, &expansion);
                         if (t != TokSym)
                             error(FATAL, "Expected a symbol for .ifarch!");
-                        if (strcasecmp(SymBuf, ccmd(3, "uname", "-m")) == 0) {
+#ifdef unix
+                        const char *arch = ccmd(2, "uname", "-m");
+#else
+                        const char *arch = "m68k";
+#endif
+                        if (strcasecmp(SymBuf, arch) == 0) {
                             ifTrue = pushIf(&ifBase, 1);
                         } else {
                             ifTrue = pushIf(&ifBase, 0);
@@ -1117,6 +1137,8 @@ error(short type, const char *ctl, ...)
         exit(20);
 }
 
+#ifdef unix
+
 /*
  * ccmd() - execute a UNIX command and cache the result.
  */
@@ -1189,3 +1211,4 @@ ccmd(int cno, const char *cmd, const char *arg1)
     return(ccn->cc_Result);
 }
 
+#endif

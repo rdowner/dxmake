@@ -10,6 +10,9 @@ as of the next released version.
 
 ### Added
 
+- Reinstate Amiga support. DCC can now build this for the Amiga and it works as
+  expected.
+
 ### Changed
 
 - Tabs to spaces. I realise this may upset some people, but DICE source code is
